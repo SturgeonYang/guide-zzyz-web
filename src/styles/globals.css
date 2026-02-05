@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #0067D1;
+  --color-primary-dark: #0052a8;
+  --color-bg: #F5F5F5;
+  --color-card: #FFFFFF;
+  --color-card-accent: #cfebff;
+  --color-text: #000000;
+  --color-text-secondary: #48556a;
+  --color-text-muted: #A8A8A8;
+  --color-border: #e5e7eb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.2;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+
+/* Container utilities */
+.container-custom {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width: 640px) {
+  .container-custom {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-custom {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* Section spacing */
+.section-spacing {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .section-spacing {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
