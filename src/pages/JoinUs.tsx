@@ -11,8 +11,10 @@ import {
   Gift,
   Target,
 } from "lucide-react";
+import { useIsMobile } from "../components/ui/use-mobile";
 
 export default function JoinUs() {
+  const isMobile = useIsMobile();
   const [selectedDepartment, setSelectedDepartment] = useState<
     number | null
   >(0);
@@ -84,12 +86,6 @@ export default function JoinUs() {
   ];
 
   const recruitmentFlow = [
-    {
-      title: "前期准备",
-      icon: <Gift className="w-8 h-8 md:w-10 md:h-10" />,
-      description: "了解团队情况，准备个人简历和作品",
-      color: "bg-blue-500",
-    },
     {
       title: "在线报名",
       icon: <FileEdit className="w-8 h-8 md:w-10 md:h-10" />,
@@ -289,7 +285,7 @@ export default function JoinUs() {
                 style={{ padding: "40px" }}
               >
                 <div className="flex flex-col md:flex-row items-start gap-0 md:gap-8">
-                  <div className="flex items-center md:block w-full md:w-auto" style={{ marginBottom: "5px" }}>
+                  <div className="flex items-center md:block md:w-auto md:shrink-0" style={{ marginBottom: "5px" }}>
                     <motion.div
                       initial={{ scale: 0.8 }}
                       animate={{ scale: 1 }}
@@ -316,7 +312,10 @@ export default function JoinUs() {
                     >
                       {departments[selectedDepartment].name}
                     </h3>
-                    <div style={{ marginBottom: "24px", marginTop: "12px" }}>
+                    <div style={{ 
+                      marginBottom: isMobile ? "24px" : "24px",
+                      marginTop: isMobile ? "12px" : "0"
+                    }}>
                       <h4
                         className="text-lg md:text-xl font-bold text-black"
                         style={{ marginBottom: "16px" }}
@@ -340,7 +339,11 @@ export default function JoinUs() {
                           >
                             <span
                               className="text-[#0067D1] font-bold text-xl inline-block"
-                              style={{ marginTop: "-2px", width: "12px", textAlign: "center" }}
+                              style={{ 
+                                width: "12px", 
+                                textAlign: "center",
+                                marginTop: isMobile ? "-4px" : "0px"
+                              }}
                             >
                               •
                             </span>
@@ -390,7 +393,7 @@ export default function JoinUs() {
             招新流程
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {recruitmentFlow.map((step, index) => (
               <motion.div
                 key={index}
