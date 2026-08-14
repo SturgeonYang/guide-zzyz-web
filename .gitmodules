@@ -1,0 +1,3 @@
+[submodule "zzyz-web-backend-golang"]
+	path = zzyz-web-backend-golang
+	url = https://github.com/IridiumNan/zzyz-web-backend-golang.git
