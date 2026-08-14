@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Upload, FileText, Mail, CheckCircle, X } from "lucide-react";
+import { Upload, FileText, CheckCircle, X, LogIn } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Submit() {
+  const { isLoggedIn, addPost } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [showLoginHint, setShowLoginHint] = useState(false);
 
   const categories = [
     { value: "study", label: "学习经验" },
@@ -41,9 +44,21 @@ export default function Submit() {
     return validTypes.includes(fileExtension);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isLoggedIn) {
+      setShowLoginHint(true);
+      setTimeout(() => setShowLoginHint(false), 3000);
+      return;
+    }
     if (selectedCategory && uploadedFile) {
+      // Record post in user's history
+      await addPost({
+        category: selectedCategory,
+        fileName: uploadedFile.name,
+        fileSize: uploadedFile.size,
+      });
+
       setShowSuccess(true);
       setTimeout(() => {
         setShowSuccess(false);
@@ -71,6 +86,21 @@ export default function Submit() {
             分享你的学习经验，帮助更多的学弟学妹
           </p>
         </motion.div>
+
+        {/* Login hint banner */}
+        <AnimatePresence>
+          {showLoginHint && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="flex items-center gap-3 px-6 py-4 mb-6 bg-blue-50 border-2 border-[#0067D1]/30 rounded-2xl text-[#0067D1] font-semibold"
+            >
+              <LogIn className="w-5 h-5 flex-shrink-0" />
+              请先登录再提交投稿，这样我们才能记录你的投稿历史。
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Instructions */}
         <motion.div
@@ -117,6 +147,14 @@ export default function Submit() {
             <p className="flex items-start gap-4">
               <span className="text-[#0067D1] font-bold text-xl" style={{ marginTop: '4px' }}>•</span>
               <span>内容要求：真实、原创、对他人有帮助的学习经验和建议</span>
+            </p>
+            <p className="flex items-start gap-4">
+              <span className="text-[#0067D1] font-bold text-xl" style={{ marginTop: '4px' }}>•</span>
+              <span>
+                登录后投稿可在
+                <span className="text-[#0067D1] font-semibold">「个人中心」</span>
+                查看投稿状态
+              </span>
             </p>
           </div>
         </motion.div>
@@ -231,6 +269,21 @@ export default function Submit() {
                 )}
               </div>
             </div>
+
+            {/* Success message */}
+            <AnimatePresence>
+              {showSuccess && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="flex items-center gap-3 px-6 py-4 mb-4 bg-green-50 border-2 border-green-200 rounded-2xl text-green-600 font-semibold"
+                >
+                  <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                  投稿成功！感谢你的分享，我们会尽快审核。
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Submit Button */}
             <div style={{ marginTop: '10px', paddingLeft: '48px', paddingRight: '48px' }}>

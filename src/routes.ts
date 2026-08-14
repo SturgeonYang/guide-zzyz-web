@@ -6,6 +6,7 @@ import Root from "./Root";
 import Community from "./pages/Community";
 import PostList from "./community/posts/PostList"
 import PostDetail from "./community/posts/PostDetail"
+import Profile from "./pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: "submit", Component: Submit },
+      { path: "profile", Component: Profile },
       { path: "join-us", Component: JoinUs },
       { path: "community", Component: Community ,
         children: [
