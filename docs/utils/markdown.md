@@ -12,6 +12,7 @@ Markdown 是一种**轻量级标记语言**：用简单符号(如 `#`、`*`、`-
 - GitHub 会自动渲染 `.md` 文件，在网页上直接看到排版效果。
 
 推荐Markdown专用渲染编辑器: [**marktext**](https://marktext.me/)
+
 当然你可以直接使用 vscode 或者 jetbrain IDE 等会自动渲染markdown的IDE
 
 ## 二、标题
