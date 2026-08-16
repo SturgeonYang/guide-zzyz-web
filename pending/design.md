@@ -1,4 +1,3 @@
-
 # Next step for 2026 `Gemini生成，仅供参考`
 
 ## 1.User Authentication and Verification System
